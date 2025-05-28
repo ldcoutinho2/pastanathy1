@@ -273,34 +273,20 @@
     <img src="foto teste.png" alt="Print do Instagram" style="max-width: 90%; border-radius: 12px; box-shadow: 0 0 10px #ff0077; margin-bottom: 20px;">
     <a href="https://t.me/nathysafadinhavipbot?start=cmb8527xq24nmmf0s3xrh1st8" class="telegram-btn" target="_blank" onclick="fbq('track', 'LeadTelegram');"><strong>ENTRAR AGORA</strong></a>
 
+          </div>
     </div>
 
-  <footer>
-    © 2025 Nathy Exclusiva - Todos os direitos reservados.
-  </footer>
-
-  <!-- SCRIPT DO CRONÔMETRO FUNCIONAL (5 MIN) -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const tempoFinal = new Date().getTime() + 5 * 60 * 1000; // 5 minutos a partir de agora
-      const contador = document.getElementById("contador");
-
-      const intervalo = setInterval(() => {
+    <script>
+      const fim = new Date().getTime() + 3600000; // 1 hora
+      const x = setInterval(() => {
         const agora = new Date().getTime();
-        const tempoRestante = tempoFinal - agora;
-
-        if (tempoRestante <= 0) {
-          clearInterval(intervalo);
-          contador.innerHTML = "⛔ Tempo esgotado!";
+        const t = fim - agora;
+        if (t < 0) {
+          clearInterval(x);
+          document.getElementById("contador").innerHTML = "🚨 Tempo esgotado!";
           return;
         }
-
-        const minutos = Math.floor((tempoRestante % (1000 * 60 * 60)) / (1000 * 60));
-        const segundos = Math.floor((tempoRestante % (1000 * 60)) / 1000);
-
-        contador.innerHTML = `${minutos}m ${segundos < 10 ? '0' + segundos : segundos}s restantes`;
+        const min = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
+        const seg = Math.floor((t % (1000 * 60)) / 1000);
+        document.getElementById("contador").innerHTML = ⏰ GRUPO FECHA EM: ${min}m ${seg}s;
       }, 1000);
-    });
-  </script>
-</body>
-</html>
