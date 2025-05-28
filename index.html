@@ -6,7 +6,7 @@
     <title>Nathy VIP 🔥</title>
     <link rel="stylesheet" href="style.css" />
 
-    <!-- Pixel do Facebook -->
+    <!-- Pixel do Facebook já existente -->
     <script>
       !function(f,b,e,v,n,t,s)
       {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -16,39 +16,92 @@
       t.src=v;s=b.getElementsByTagName(e)[0];
       s.parentNode.insertBefore(t,s)}(window, document,'script',
       'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', 'SEU_PIXEL_ID_AQUI');
+      fbq('init', '327094873647732');
       fbq('track', 'PageView');
     </script>
     <noscript>
       <img height="1" width="1" style="display:none"
-        src="https://www.facebook.com/tr?id=SEU_PIXEL_ID_AQUI&ev=PageView&noscript=1" />
+        src="https://www.facebook.com/tr?id=327094873647732&ev=PageView&noscript=1" />
     </noscript>
+
+    <style>
+      body {
+        background: #000;
+        color: #fff;
+        font-family: sans-serif;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+      }
+      .container {
+        padding: 20px;
+      }
+      .logo {
+        width: 120px;
+        margin: 20px auto;
+      }
+      .banner {
+        width: 100%;
+        max-width: 500px;
+        margin-bottom: 20px;
+      }
+      .cta-text {
+        font-size: 24px;
+        color: #ff4081;
+        margin-bottom: 10px;
+      }
+      .countdown {
+        font-size: 18px;
+        margin-bottom: 20px;
+      }
+      #timer {
+        font-size: 32px;
+        color: #ffd700;
+      }
+      .video-wrapper {
+        position: relative;
+        display: inline-block;
+      }
+      video {
+        width: 100%;
+        max-width: 500px;
+        filter: blur(20px);
+      }
+      .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .btn-play {
+        background: #ff4081;
+        color: white;
+        font-size: 22px;
+        padding: 15px 25px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        box-shadow: 0 0 20px #ff4081;
+      }
+    </style>
   </head>
-
   <body>
-    <!-- Banner -->
-    <header>
-      <img src="banner.jpg" alt="Banner da Nathy" class="banner" />
-    </header>
+    <div class="container">
+      <img src="logo.png" alt="Logo" class="logo" />
+      <img src="banner.jpg" alt="Banner" class="banner" />
 
-    <!-- CTA forte acima do cronômetro -->
-    <section class="cta-top">
-      <h1>😈 Quer me ver peladinha? Só clicar no botão…</h1>
-    </section>
+      <h1 class="cta-text">😈 Quer me ver peladinha? Só clicar no botão…</h1>
 
-    <!-- Cronômetro -->
-    <section class="timer">
-      <h2>Oferta termina em:</h2>
-      <div id="countdown">
-        <span id="hours">00</span>:
-        <span id="minutes">00</span>:
-        <span id="seconds">00</span>
+      <div class="countdown">
+        <p>Oferta termina em:</p>
+        <div id="timer">00:00:00</div>
       </div>
-    </section>
 
-    <!-- Vídeo embaçado com botão de play -->
-    <section class="video-blur">
-      <div class="video-container">
+      <div class="video-wrapper">
         <video id="blurredVideo" autoplay muted loop playsinline>
           <source src="preview.mp4" type="video/mp4" />
         </video>
@@ -56,14 +109,33 @@
           <button onclick="goToVideoPage()" class="btn-play">▶ Ver agora</button>
         </div>
       </div>
-    </section>
+    </div>
 
-    <!-- Redirecionamento (simulação de página com som e botão final) -->
     <script>
       function goToVideoPage() {
         fbq('trackCustom', 'BotaoPlay');
         window.location.href = "video.html";
       }
+
+      // Cronômetro de contagem regressiva (5 minutos)
+      let duration = 60 * 5;
+      let display = document.getElementById('timer');
+      let timer = duration, minutes, seconds;
+      setInterval(function () {
+        let hours = parseInt(timer / 3600, 10);
+        minutes = parseInt((timer % 3600) / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+
+        hours = hours < 10 ? "0" + hours : hours;
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = hours + ":" + minutes + ":" + seconds;
+
+        if (--timer < 0) {
+          timer = 0;
+        }
+      }, 1000);
     </script>
   </body>
 </html>
