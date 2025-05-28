@@ -1,55 +1,69 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Conteúdo Exclusivo</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #000;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-    }
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nathy VIP 🔥</title>
+    <link rel="stylesheet" href="style.css" />
 
-    video {
-      width: 100%;
-      max-width: 600px;
-      border-radius: 16px;
-      margin-bottom: 20px;
-    }
+    <!-- Pixel do Facebook -->
+    <script>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', 'SEU_PIXEL_ID_AQUI');
+      fbq('track', 'PageView');
+    </script>
+    <noscript>
+      <img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=SEU_PIXEL_ID_AQUI&ev=PageView&noscript=1" />
+    </noscript>
+  </head>
 
-    .telegram-btn {
-      background-color: #0088cc;
-      color: white;
-      padding: 14px 28px;
-      font-size: 16px;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      text-decoration: none;
-      font-weight: bold;
-      box-shadow: 0 0 12px rgba(0, 136, 204, 0.6);
-    }
+  <body>
+    <!-- Banner -->
+    <header>
+      <img src="banner.jpg" alt="Banner da Nathy" class="banner" />
+    </header>
 
-    .telegram-btn:hover {
-      background-color: #0077b3;
-    }
-  </style>
-</head>
-<body>
+    <!-- CTA forte acima do cronômetro -->
+    <section class="cta-top">
+      <h1>😈 Quer me ver peladinha? Só clicar no botão…</h1>
+    </section>
 
-  <video controls autoplay>
-    <source src="video-completo.mp4" type="video/mp4">
-    Seu navegador não suporta vídeos.
-  </video>
+    <!-- Cronômetro -->
+    <section class="timer">
+      <h2>Oferta termina em:</h2>
+      <div id="countdown">
+        <span id="hours">00</span>:
+        <span id="minutes">00</span>:
+        <span id="seconds">00</span>
+      </div>
+    </section>
 
-  <a href="https://t.me/nathyviobot" class="telegram-btn">💖 ENTRAR NO CANAL 💖</a>
+    <!-- Vídeo embaçado com botão de play -->
+    <section class="video-blur">
+      <div class="video-container">
+        <video id="blurredVideo" autoplay muted loop playsinline>
+          <source src="preview.mp4" type="video/mp4" />
+        </video>
+        <div class="overlay">
+          <button onclick="goToVideoPage()" class="btn-play">▶ Ver agora</button>
+        </div>
+      </div>
+    </section>
 
-</body>
+    <!-- Redirecionamento (simulação de página com som e botão final) -->
+    <script>
+      function goToVideoPage() {
+        fbq('trackCustom', 'BotaoPlay');
+        window.location.href = "video.html";
+      }
+    </script>
+  </body>
 </html>
