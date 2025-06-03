@@ -39,12 +39,22 @@
     .carousel::-webkit-scrollbar { display: none; }
     .carousel img { height: 220px; border-radius: 14px; border: 4px solid #ff0077; object-fit: cover; flex-shrink: 0; }
     footer { margin-top: 30px; font-size: 13px; color: #888; }
+    #cronometro { font-size: 20px; margin-top: 16px; color: #ff6a00; font-weight: bold; animation: blink 1s infinite; }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+    .bloqueio { display: none; color: #f00; font-weight: bold; margin-top: 30px; font-size: 18px; }
   </style>
 </head>
 <body>
+  <audio autoplay>
+    <source src="/audio-nathy.mp3" type="audio/mp3">
+    Seu navegador não suporta áudio.
+  </audio>
+
   <h1>😈 VEM VER A NATHY GOZANDO AO VIVO NO TELEGRAM 😈</h1>
   <p>Ela tem só 21 aninhos, cara de santinha e tá peladinha te esperando no grupo secreto...<br>
   Lá dentro tem vídeo novo TODO DIA dela se contorcendo, gemendo e chamando teu nome…</p>
+
+  <div id="cronometro"></div>
 
   <div class="video-wrapper">
     <video autoplay muted loop playsinline>
@@ -55,9 +65,11 @@
 
   <div class="alerta">🚨 SOMENTE HOJE: As 20 primeiras entradas no grupo ganham vídeo proibido + áudio gemido personalizado!</div>
 
-  <a href="https://t.me/nathysafadinhavipbot?start=cmb8527xq24nmmf0s3xrh1st8" class="telegram-btn" target="_blank" onclick="fbq('track', 'LeadTelegram');">
+  <a href="https://t.me/nathysafadinhavipbot?start=cmb8527xq24nmmf0s3xrh1st8" class="telegram-btn" target="_blank" id="btnTelegram" onclick="fbq('track', 'LeadTelegram');">
     🔥 ENTRAR AGORA E VER TUDO NO TELEGRAM 🔥
   </a>
+
+  <div class="bloqueio" id="bloqueioTexto">⛔ O acesso ao grupo foi encerrado. Tente novamente amanhã.</div>
 
   <div class="carousel">
     <img src="/foto1.jpg" alt="preview">
@@ -68,5 +80,29 @@
   <footer>
     © 2025 Nathy Putinha VIP – Todos os direitos reservados.
   </footer>
+
+  <script>
+    const tempoLimite = 5 * 60 * 1000;
+    const inicio = new Date().getTime();
+    const cronometro = document.getElementById('cronometro');
+    const bloqueioTexto = document.getElementById('bloqueioTexto');
+    const btnTelegram = document.getElementById('btnTelegram');
+
+    const intervalo = setInterval(() => {
+      const agora = new Date().getTime();
+      const tempoRestante = tempoLimite - (agora - inicio);
+
+      if (tempoRestante <= 0) {
+        clearInterval(intervalo);
+        cronometro.innerHTML = "⛔ TEMPO ESGOTADO";
+        bloqueioTexto.style.display = 'block';
+        btnTelegram.style.display = 'none';
+      } else {
+        const minutos = Math.floor((tempoRestante % (1000 * 60 * 60)) / (1000 * 60));
+        const segundos = Math.floor((tempoRestante % (1000 * 60)) / 1000);
+        cronometro.innerHTML = `${minutos}m ${segundos < 10 ? '0' + segundos : segundos}s RESTANTES PRA ENTRAR NO GRUPO VIP`;
+      }
+    }, 1000);
+  </script>
 </body>
 </html>
