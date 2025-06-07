@@ -56,12 +56,19 @@
 
   <div id="cronometro"></div>
 
-  <div class="video-container">
-    <video autoplay muted loop playsinline>
-      <source src="/video-vsl2.mp4" type="video/mp4">
-      Seu navegador não suporta vídeo.
-    </video>
-  </div>
+  .video-container {
+  max-width: 480px;
+  margin: 0 auto;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 12px #ff0077;
+}
+
+.video-container video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
 
   <div class="alerta">🚨 SOMENTE HOJE As 20 primeiras chamadas com a Nathy vão ganhar: Chamada ao vivo PRIVADA até gozar + grupo vip 🎁 Clica abaixo e chama no PV pra garantir sua chamada agora!</div>
 
