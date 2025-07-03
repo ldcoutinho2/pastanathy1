@@ -1436,36 +1436,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </script>
     
    <script>
-  const redirectUrl = "https://previasmcmirella.vercel.app/";
+  const redirectUrl = "https://previasmcmirella.vercel.app/"; // Troca pelo teu link real
 
+  // 1. Cria um histórico falso pra capturar botão voltar (Android/iPhone)
   history.pushState(null, null, location.href);
-  window.addEventListener("popstate", () => {
+  window.addEventListener("popstate", function () {
     location.href = redirectUrl;
   });
 
-  document.addEventListener("visibilitychange", () => {
+  // 2. Detecta quando o lead tenta sair ou trocar de aba
+  document.addEventListener("visibilitychange", function () {
     if (document.visibilityState === "hidden") {
       location.href = redirectUrl;
     }
-  });
-
-  window.addEventListener("beforeunload", (e) => {
-    e.preventDefault();
-    e.returnValue = '';
-    // Navegação pelo navegador ou fechar aba
-    location.href = redirectUrl;
-  });
-
-  document.querySelectorAll("a[target='_blank']").forEach(link => {
-    link.addEventListener("click", (e) => {
-      e.preventDefault();
-      location.href = redirectUrl;
-    });
-  });
-
-  // Pop-up extra ao tentar fechar/navegar no botão fechar
-  window.addEventListener("unhandledrejection", () => {
-    // fallback
-    location.href = redirectUrl;
   });
 </script>
