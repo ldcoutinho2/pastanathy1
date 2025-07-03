@@ -1435,11 +1435,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       });
     </script>
     
-    <script>
-  document.addEventListener("mouseout", function(e) {
-    if (!e.toElement && !e.relatedTarget && e.clientY < 10) {
-      window.location.href = "https://previasmcmirella.vercel.app/";
-    }
-  });
+   <script>
+  history.pushState(null, null, location.href);
+  window.onpopstate = function () {
+    window.location.href = "https://seudominio.com/previada-mirella";
+  };
 </script>
+
 
