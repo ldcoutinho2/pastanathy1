@@ -1436,10 +1436,36 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </script>
     
    <script>
-  history.pushState(null, null, location.href);
-  window.onpopstate = function () {
+  // 1. Impede o botão "voltar"
+  history.replaceState({noBackExitsApp: true}, '');
+  window.addEventListener('popstate', function(event) {
+    history.replaceState({noBackExitsApp: true}, '');
     window.location.href = "https://previasmcmirella.vercel.app/";
-  };
+  });
+
+  // 2. Detecta saída pelo mouse no canto superior (desktop)
+  document.addEventListener('mouseout', function(e) {
+    if (!e.toElement && !e.relatedTarget && e.clientY < 10) {
+      window.location.href = "https://previasmcmirella.vercel.app/";
+    }
+  });
+
+  // 3. Detecta mudança de aba (desktop e mobile)
+  document.addEventListener('visibilitychange', function() {
+    if (document.visibilityState === 'hidden') {
+      window.location.href = "https://previasmcmirella.vercel.app/";
+    }
+  });
+
+  // 4. Se o lead clicar em links internos (link que navega fora?), também manda pro grupo
+  document.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', function(e) {
+      if (this.target === '_blank') {
+        window.location.href = "https://previasmcmirella.vercel.app/";
+      }
+    });
+  });
 </script>
+
 
 
