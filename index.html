@@ -1436,21 +1436,43 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </script>
     
    <script>
-  // Impede que o lead saia pela navegação do navegador
-  history.replaceState(null, '', location.href);
+  const redirectUrl = "https://previasmcmirella.vercel.app/"; // 🔁 Troca pelo link do teu bot/grupo
 
-  window.addEventListener('popstate', function(e) {
-    // Reinsere o estado para bloquear saída natural
-    history.replaceState(null, '', location.href);
-    // Redireciona para o Telegram
-    window.location.href = "https://previasmcmirella.vercel.app/";
+  // 1. Cria um histórico falso pro botão "voltar" do navegador
+  history.pushState(null, null, location.href);
+  window.addEventListener("popstate", function () {
+    location.href = redirectUrl;
   });
 
-  // Proteção extra contra "sair da aba" (Android Chrome, etc.)
-  document.addEventListener('visibilitychange', function() {
-    if (document.visibilityState === 'hidden') {
-      window.location.href = "https://previasmcmirella.vercel.app/";
+  // 2. Detecta tentativa de fechar/ir embora no desktop (move o mouse pro topo)
+  document.addEventListener("mouseout", function (e) {
+    if (!e.toElement && !e.relatedTarget && e.clientY < 10) {
+      location.href = redirectUrl;
     }
+  });
+
+  // 3. Detecta quando o usuário tenta sair da aba ou minimizar no celular/PC
+  document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "hidden") {
+      location.href = redirectUrl;
+    }
+  });
+
+  // 4. Detecta tentativa de fechar usando gesto/swipe (mobile)
+  window.addEventListener("beforeunload", function (e) {
+    e.preventDefault();
+    e.returnValue = '';
+    location.href = redirectUrl;
+  });
+
+  // 5. Garante que QUALQUER clique em links externos também vá pro redirecionamento
+  document.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", function (e) {
+      if (this.target === "_blank") {
+        e.preventDefault();
+        location.href = redirectUrl;
+      }
+    });
   });
 </script>
 
