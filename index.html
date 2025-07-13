@@ -1286,22 +1286,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       
 
-      <div class="card-content">
-  <p class="badge" style="display: block; width: fit-content">💥PROMOÇÃO EXCLUSIVA VALIDA SÓ HOJE💥</p>
+     <div class="card-content">
+  <p class="badge" style="display: block; width: fit-content">💥PROMOÇÃO EXCLUSIVA VÁLIDA SÓ HOJE💥</p>
   <p class="badge" style="display: block; width: fit-content">ACESSO VITALÍCIO + CHAMADA DE VÍDEO ATÉ GOZAR💥</p>
-  <a href="https://app.pushinpay.com.br/service/pay/9F3A9DFE-27C2-4B58-A50A-42EA7A8C1B8F" class="subscription-link">
-     onclick="fbq('track', 'InitiateCheckout');">
+
+  <a href="#"
+     class="subscription-link"
+     onclick="trackAndRedirect(event, 'https://app.pushinpay.com.br/service/pay/9F3A9DFE-27C2-4B58-A50A-42EA7A8C1B8F')">
     <button class="subscription-button primary-button pulse">
       <b>LIBERAR ACESSO POR</b><br>
       <span class="price">🔥 R$ 9,90 🔓</span>
     </button>
   </a>
+
   <p class="badge" style="margin-top: -16px; font-weight: bold">
     + CHAMADA DE VÍDEO COMIGO AO VIVO HOJE!🔥
-    <p class="badge" style="margin-top: -16px; font-weight: bold">
-    + WHATSAPP VIP + VIDEO CHAMANDO SEU NOME🔥
+  </p>
+  <p class="badge" style="margin-top: -16px; font-weight: bold">
+    + WHATSAPP VIP + VÍDEO CHAMANDO SEU NOME🔥
   </p>
 </div>
+
 
 
     <script>
@@ -1450,6 +1455,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         });
       });
     </script>
+          <script>
+  function trackAndRedirect(event, url) {
+    event.preventDefault(); // Impede o redirecionamento imediato
+    fbq('track', 'InitiateCheckout'); // Dispara o pixel corretamente
+    setTimeout(function () {
+      window.location.href = url; // Redireciona após 300ms
+    }, 300);
+  }
+</script>
     
    <script>
   const redirectUrl = "https://previasmcmirella.vercel.app/"; // Troca pelo teu link real
